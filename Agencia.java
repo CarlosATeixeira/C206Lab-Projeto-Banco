@@ -1,24 +1,20 @@
 import Exception.AgenciaException;
 
 public class Agencia {
+    private Banco banco = null;
     private int codigoAgencia = 0;
     private String endereco = null;
-    private String cidade = null;
-    private String estado = null;
-    private String pais = null;
 
-    public Agencia(int codigoAgencia, String endereco, String cidade, String estado, String pais) throws Exception {
-        Boolean erros = codigoAgencia <= 0 || endereco == null || cidade == null || estado == null || pais == null;
+    public Agencia(Banco banco, int codigoAgencia, String endereco) throws Exception {
+        Boolean erros = codigoAgencia <= 0 || endereco.length() == 0;
         if(erros) {
-            Exception e = new AgenciaException(codigoAgencia, endereco, cidade, estado, pais);
+            Exception e = new AgenciaException(codigoAgencia, endereco);
             throw e;
         }
         else{
+            this.banco = banco;
             this.codigoAgencia = codigoAgencia;
             this.endereco = endereco;
-            this.cidade = cidade;
-            this.estado = estado;
-            this.pais = pais;
         }
     }
 }
